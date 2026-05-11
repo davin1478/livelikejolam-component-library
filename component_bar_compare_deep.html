@@ -2,154 +2,114 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>bar_compare · deep</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>livelikejolam — bar_compare (deep)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+:root{
+  --ivory:#F4EFE3;--deep:#2D2A22;--ink:#1A1A17;--warm-white:#E8DDC7;
+  --muted:#7A7468;--muted-deep:#8A8474;
+  --brass:#B8923B;--brass-bright:#C9A961;
+  --line:#C8C0A8;--line-deep:#4A4538;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1080px;height:1350px;overflow:hidden;}
+body{font-family:'Noto Serif TC',serif;font-feature-settings:"palt";-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;}
 
-  :root {
-    --ivory: #F4EFE3;
-    --deep: #2D2A22;
-    --ink: #1A1A17;
-    --warm-white: #E8DDC7;
-    --brass: #B8923B;
-    --brass-bright: #C9A961;
-    --line: #C8C0A8;
-    --line-deep: #4A4538;
-    --muted: #7A7468;
-    --muted-deep: #8A8474;
-  }
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden;}
+.slide.ivory{background:var(--ivory);color:var(--ink);}
+.slide.deep{background:var(--deep);color:var(--warm-white);}
+.slide.photo{background:#000;color:#fff;}
 
+.corner{position:absolute;width:72px;height:72px;z-index:4;pointer-events:none;}
+.corner-tl{top:36px;left:36px;border-top:2px solid var(--brass);border-left:2px solid var(--brass);}
+.corner-tr{top:36px;right:36px;border-top:2px solid var(--brass);border-right:2px solid var(--brass);}
+.corner-bl{bottom:36px;left:36px;border-bottom:2px solid var(--brass);border-left:2px solid var(--brass);}
+.corner-br{bottom:36px;right:36px;border-bottom:2px solid var(--brass);border-right:2px solid var(--brass);}
+.deep .corner-tl,.photo .corner-tl{border-top-color:var(--brass-bright);border-left-color:var(--brass-bright);}
+.deep .corner-tr,.photo .corner-tr{border-top-color:var(--brass-bright);border-right-color:var(--brass-bright);}
+.deep .corner-bl,.photo .corner-bl{border-bottom-color:var(--brass-bright);border-left-color:var(--brass-bright);}
+.deep .corner-br,.photo .corner-br{border-bottom-color:var(--brass-bright);border-right-color:var(--brass-bright);}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { width: 1080px; height: 1350px; }
-  body {
-    font-family: 'Noto Serif TC', serif;
-    overflow: hidden;
-  }
-  .slide {
-    width: 1080px;
-    height: 1350px;
-    position: relative;
-    overflow: hidden;
-  }
-  .slide.ivory { background: var(--ivory); color: var(--ink); }
-  .slide.deep { background: var(--deep); color: var(--warm-white); }
-  .slide.photo { background: #000; }
+.banner{position:absolute;top:68px;left:90px;font-family:'Cormorant Garamond',serif;line-height:1.4;z-index:5;}
+.banner-line1{font-size:22px;font-weight:600;letter-spacing:6px;text-transform:uppercase;}
+.banner-line2{font-size:19px;font-weight:300;letter-spacing:3px;opacity:0.78;margin-top:4px;}
+.ivory .banner{color:var(--ink);}
+.deep .banner{color:var(--brass-bright);}
+.deep .banner-line2{color:var(--warm-white);opacity:0.7;}
+.photo .banner{color:#fff;}
+.photo .banner-line2{color:rgba(255,255,255,0.8);}
 
-  /* Corners */
-  .corner { position: absolute; width: 64px; height: 64px; z-index: 4; }
-  .corner-tl { top: 36px; left: 36px; border-top: 2px solid var(--brass); border-left: 2px solid var(--brass); }
-  .corner-tr { top: 36px; right: 36px; border-top: 2px solid var(--brass); border-right: 2px solid var(--brass); }
-  .corner-bl { bottom: 36px; left: 36px; border-bottom: 2px solid var(--brass); border-left: 2px solid var(--brass); }
-  .corner-br { bottom: 36px; right: 36px; border-bottom: 2px solid var(--brass); border-right: 2px solid var(--brass); }
+.page-chip{position:absolute;top:76px;right:90px;font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;letter-spacing:6px;z-index:5;}
+.ivory .page-chip{color:var(--muted);}
+.deep .page-chip{color:var(--brass-bright);}
+.photo .page-chip{color:rgba(255,255,255,0.85);}
 
-  /* Banner */
-  .banner {
-    position: absolute; top: 60px; left: 80px;
-    font-family: 'Cormorant Garamond', serif; line-height: 1.5; z-index: 5;
-  }
-  .banner-line1 { font-weight: 600; letter-spacing: 5px; text-transform: uppercase; font-size: 18px; }
-  .banner-line2 { font-size: 14px; opacity: 0.75; font-weight: 300; margin-top: 4px; letter-spacing: 2.5px; }
-  .ivory .banner { color: var(--ink); }
-  .deep .banner { color: var(--brass-bright); }
-  .deep .banner-line2 { color: var(--warm-white); }
-  .photo .banner { color: #fff; }
+.content{position:absolute;left:108px;right:108px;top:202px;bottom:198px;display:flex;flex-direction:column;justify-content:center;}
 
-  /* Page chip */
-  .page-chip {
-    position: absolute; top: 60px; right: 80px;
-    font-family: 'Cormorant Garamond', serif; font-size: 20px;
-    letter-spacing: 4px; z-index: 5; font-weight: 500;
-  }
-  .ivory .page-chip { color: var(--muted); }
-  .deep .page-chip { color: var(--brass-bright); }
-  .photo .page-chip { color: rgba(255,255,255,0.85); }
+.eyebrow{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;letter-spacing:8px;text-transform:uppercase;margin-bottom:36px;display:flex;align-items:center;gap:22px;}
+.eyebrow::after{content:'';flex:1;height:1px;opacity:0.4;}
+.ivory .eyebrow{color:var(--brass);}
+.ivory .eyebrow::after{background:var(--brass);}
+.deep .eyebrow{color:var(--brass-bright);}
+.deep .eyebrow::after{background:var(--brass-bright);}
+.photo .eyebrow{color:var(--brass-bright);}
+.photo .eyebrow::after{background:var(--brass-bright);}
 
-  /* Content area */
-  .content {
-    position: absolute; left: 100px; right: 100px;
-    top: 200px; bottom: 200px;
-    display: flex; flex-direction: column; justify-content: center;
-  }
+.footer-line{position:absolute;bottom:72px;left:108px;right:108px;padding-top:22px;display:flex;justify-content:space-between;align-items:center;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;letter-spacing:4px;text-transform:uppercase;}
+.ivory .footer-line{color:var(--muted);border-top:1px solid var(--line);}
+.deep .footer-line{color:var(--muted-deep);border-top:1px solid var(--line-deep);}
+.photo .footer-line{color:rgba(255,255,255,0.7);border-top:1px solid rgba(255,255,255,0.25);}
 
-  /* Eyebrow */
-  .eyebrow {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px; letter-spacing: 6px; text-transform: uppercase;
-    margin-bottom: 32px; font-weight: 500;
-    display: flex; align-items: center; gap: 20px;
-  }
-  .eyebrow::after { content: ''; flex: 1; height: 1px; opacity: 0.4; }
-  .ivory .eyebrow { color: var(--brass); }
-  .ivory .eyebrow::after { background: var(--brass); }
-  .deep .eyebrow { color: var(--brass-bright); }
-  .deep .eyebrow::after { background: var(--brass-bright); }
+.h-xxl{font-weight:900;font-size:112px;line-height:1.10;letter-spacing:-2.2px;}
+.h-xl{font-weight:900;font-size:104px;line-height:1.14;letter-spacing:-1.6px;}
+.h-lg{font-weight:900;font-size:92px;line-height:1.20;letter-spacing:-1.2px;}
+.h-md{font-weight:700;font-size:68px;line-height:1.28;letter-spacing:-0.6px;}
+.h-sm{font-weight:700;font-size:56px;line-height:1.30;letter-spacing:-0.4px;}
+.body-lg{font-size:38px;font-weight:500;line-height:1.55;}
+.body{font-size:32px;font-weight:400;line-height:1.85;}
+.body-sm{font-size:30px;font-weight:400;line-height:1.85;}
 
-  /* Footer */
-  .footer-line {
-    position: absolute; bottom: 70px; left: 100px; right: 100px;
-    padding-top: 24px;
-    display: flex; justify-content: space-between; align-items: center;
-    font-family: 'Cormorant Garamond', serif; font-size: 14px;
-    letter-spacing: 3px; text-transform: uppercase;
-  }
-  .ivory .footer-line { color: var(--muted); border-top: 1px solid var(--line); }
-  .deep .footer-line { color: var(--muted-deep); border-top: 1px solid var(--line-deep); }
-  .photo .footer-line { color: rgba(255,255,255,0.7); border-top: 1px solid rgba(255,255,255,0.25); }
+.underline{background-image:linear-gradient(transparent calc(100% - 12px),var(--brass) calc(100% - 12px),var(--brass) calc(100% - 6px),transparent calc(100% - 6px));background-repeat:no-repeat;padding:0 4px;}
+.deep .underline,.photo .underline{background-image:linear-gradient(transparent calc(100% - 12px),var(--brass-bright) calc(100% - 12px),var(--brass-bright) calc(100% - 6px),transparent calc(100% - 6px));}
 
-  /* Typography */
-  .h-xl { font-weight: 900; font-size: 96px; line-height: 1.18; letter-spacing: -1px; }
-  .h-lg { font-weight: 900; font-size: 80px; line-height: 1.22; letter-spacing: -0.5px; }
-  .h-md { font-weight: 700; font-size: 62px; line-height: 1.3; }
-  .body { font-size: 32px; line-height: 1.85; }
-  .body-md { font-size: 34px; line-height: 1.85; }
-
-  /* Underline accent */
-  .underline {
-    background-image: linear-gradient(transparent calc(100% - 10px), var(--brass) calc(100% - 10px), var(--brass) calc(100% - 4px), transparent calc(100% - 4px));
-    background-size: 100% 100%; background-repeat: no-repeat;
-    padding: 0 4px;
-  }
-  .deep .underline {
-    background-image: linear-gradient(transparent calc(100% - 10px), var(--brass-bright) calc(100% - 10px), var(--brass-bright) calc(100% - 4px), transparent calc(100% - 4px));
-  }
-
-
-  .bar-row { margin: 28px 0; }
-  .bar-label {
-    display: flex; justify-content: space-between;
-    font-size: 26px; margin-bottom: 10px;
-  }
-  .bar-track { height: 28px; border-radius: 2px; overflow: hidden; }
-  .ivory .bar-track { background: rgba(184,146,59,0.15); }
-  .deep .bar-track { background: rgba(201,169,97,0.15); }
-  .bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--brass) 0%, var(--brass-bright) 100%);
-  }
-
+.bc-headline{font-weight:700;font-size:64px;line-height:1.28;letter-spacing:-0.6px;margin-bottom:40px;}
+.bar-row{margin:32px 0;}
+.bar-label{display:flex;justify-content:space-between;align-items:baseline;font-size:28px;margin-bottom:14px;}
+.bar-pct{font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:2px;opacity:0.65;font-size:24px;}
+.bar-track{height:28px;border-radius:1px;overflow:hidden;}
+.ivory .bar-track{background:rgba(184,146,59,0.14);}
+.deep .bar-track{background:rgba(201,169,97,0.14);}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--brass) 0%,var(--brass-bright) 100%);}
+.bc-verdict{font-size:36px;font-weight:700;line-height:1.5;padding-left:28px;margin-top:48px;letter-spacing:-0.3px;}
+.ivory .bc-verdict{color:var(--brass);border-left:4px solid var(--brass);}
+.deep .bc-verdict{color:var(--brass-bright);border-left:4px solid var(--brass-bright);}
 </style>
 </head>
 <body>
-
 <div class="slide deep">
 
-  <span class="corner corner-tl"></span><span class="corner corner-tr"></span>
-  <span class="corner corner-bl"></span><span class="corner corner-br"></span>
+  <span class="corner corner-tl"></span>
+  <span class="corner corner-tr"></span>
+  <span class="corner corner-bl"></span>
+  <span class="corner corner-br"></span>
   <div class="banner">
     <div class="banner-line1">livelikejolam</div>
     <div class="banner-line2">by @jolamstoic</div>
   </div>
   <div class="page-chip">{{page_number}} / {{total_pages}}</div>
+  <div class="footer-line">
+    <span>livelikejolam.com</span>
+    <span>{{page_number}} / {{total_pages}}</span>
+  </div>
+
   <div class="content">
     <div class="eyebrow">{{eyebrow}}</div>
-    <div class="h-md" style="margin-bottom: 28px;">{{headline_html}}</div>
+    <div class="bc-headline">{{headline_html}}</div>
     {{bars_html}}
-    <div class="punch-quote" style="font-size: 32px; margin-top: 36px;">{{verdict_html}}</div>
+    <div class="bc-verdict">{{verdict_html}}</div>
   </div>
-  <div class="footer-line"><span>livelikejolam.com</span><span>{{page_number}} / {{total_pages}}</span></div>
-
 </div>
-
 </body>
 </html>
